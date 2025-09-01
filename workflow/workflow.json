@@ -6,7 +6,7 @@
         "pollTimes": {
           "item": [
             {
-              "mode": "everyMinute"
+              "mode": "everyHour"
             }
           ]
         },
@@ -312,8 +312,8 @@
     {
       "parameters": {
         "resource": "draft",
-        "subject": "={{ $json.message.content.coverEmail.subject }}",
-        "message": "={{ $json.message.content.coverEmail.body }}",
+        "subject": "=Bills",
+        "message": "={{ $json.message.content.cover_email.body }}",
         "options": {}
       },
       "type": "n8n-nodes-base.gmail",
@@ -484,16 +484,16 @@
         "columns": {
           "mappingMode": "defineBelow",
           "value": {
-            "Zepbound": "={{ $json.url }}",
-            "mounjaro": "={{ $json.url }}"
+            "pentoxifylline": "{{ $json.url }}",
+            "lanoxin": "{{ $json.url }}"
           },
           "matchingColumns": [
-            "Zepbound"
+            "lanoxin"
           ],
           "schema": [
             {
-              "id": "Zepbound",
-              "displayName": "Zepbound",
+              "id": "lanoxin",
+              "displayName": "lanoxin",
               "required": false,
               "defaultMatch": false,
               "display": true,
@@ -502,13 +502,14 @@
               "removed": false
             },
             {
-              "id": "mounjaro",
-              "displayName": "mounjaro",
+              "id": "pentoxifylline",
+              "displayName": "pentoxifylline",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -671,7 +672,7 @@
       "parameters": {
         "from": "+19034594136",
         "to": "+918447104928",
-        "message": "={{ JSON.stringify($('Message a model').item.json.choices[0].message.content.patient_facing_report) }}",
+        "message": "={{ $(\"Message a model\").item.json.choices[0].message.content.patient_report.summary }}",
         "options": {}
       },
       "type": "n8n-nodes-base.twilio",
@@ -775,7 +776,7 @@
       "parameters": {
         "from": "+19034594136",
         "to": "+918447104928",
-        "message": "={{ $('Message a model1').item.json.message.content.patient_alert.message }}",
+        "message": "={{ $('Message a model1').item.json.message.content.patientAlertMessage.message }}",
         "options": {}
       },
       "type": "n8n-nodes-base.twilio",
@@ -917,27 +918,31 @@
           "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit#gid=0"
         },
         "columns": {
-          "mappingMode": "defineBelow",
+          "mappingMode": "autoMapInputData",
           "value": {},
-          "matchingColumns": [],
+          "matchingColumns": [
+            "lanoxin"
+          ],
           "schema": [
             {
-              "id": "Zepbound",
-              "displayName": "Zepbound",
+              "id": "lanoxin",
+              "displayName": "lanoxin",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             },
             {
-              "id": "mounjaro",
-              "displayName": "mounjaro",
+              "id": "pentoxifylline",
+              "displayName": "pentoxifylline",
               "required": false,
               "defaultMatch": false,
               "display": true,
               "type": "string",
-              "canBeUsedToMatch": true
+              "canBeUsedToMatch": true,
+              "removed": false
             }
           ],
           "attemptToConvertTypes": false,
@@ -959,6 +964,67 @@
           "name": "Google Sheets account"
         }
       }
+    },
+    {
+      "parameters": {
+        "folderId": "1naOJ1jctiv5k9zMJL-wvxitgmD8J_R3j",
+        "title": "Medicines"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        448
+      ],
+      "id": "872d2b81-ed3c-4428-a056-4ca26efee078",
+      "name": "Create a document2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Code1').item.json.drug_name }}\n{{ $('Code1').item.json.lowest_price }}\n{{ $('Code1').item.json.price_update_date }}\n{{ $('Code1').item.json.drug_description }}\n{{ $('Code1').item.json.related_drugs[0] }}\n{{ $('Code1').item.json.related_drugs[0].related_drug_name }}\n{{ $('Code1').item.json.related_drugs[0].related_drug_url }}\n{{ $('Code1').item.json.savings_program }}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2832,
+        448
+      ],
+      "id": "7e83ffe1-8b51-4e84-a184-ff4f99c5f492",
+      "name": "Update a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  // Parse the string inside \"data\" into a JSON object\n  let parsed;\n  try {\n    parsed = JSON.parse(item.json.data);\n  } catch (e) {\n    parsed = []; // fallback if parsing fails\n  }\n\n  // Return the parsed object so downstream nodes see it as normal JSON\n  return {\n    json: parsed[0] // if it's an array, take the first element\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2416,
+        448
+      ],
+      "id": "a676160e-08b9-45aa-a58a-812c715a1901",
+      "name": "Code1"
     }
   ],
   "pinData": {},
@@ -1294,13 +1360,46 @@
           }
         ]
       ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document2": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Create a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "2c619c2a-0f68-4a73-8660-2bbb1b7e68e5",
+  "versionId": "6ed97eae-6a6c-40d3-94ab-23b3782f439d",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0438132cd75a03310447340b1246ce0b906b51dd0cd2791936d0aec54f69c510"
