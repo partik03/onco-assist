@@ -4,6 +4,8 @@
 
 ---
 
+<img width="936" height="443" alt="Screenshot 2025-09-01 at 11 02 39 AM" src="https://github.com/user-attachments/assets/03f00577-b726-4b4e-80d1-2a6fa8361e1f" />
+
 ## 🌟 Why Onco-Assist?
 
 Managing oncology treatments often means juggling **dozens of reports, prescriptions, invoices, and medicines**.  
