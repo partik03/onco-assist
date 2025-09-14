@@ -1,0 +1,1409 @@
+{
+  "name": "n8n hackathon",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -80,
+        16
+      ],
+      "id": "84b47aa2-046f-40bb-8af8-c54d82259f0a",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "PET/CT/Histopathology",
+              "description": "Radiology and pathology reports containing imaging results, tumor measurements, and biopsy findings. Use to track diagnosis and disease progression."
+            },
+            {
+              "category": "Blood Tests",
+              "description": "Laboratory reports such as CBC, LFT, KFT, or biomarker panels showing numerical values and trends. Use to suggest treatment actions or injection needs."
+            },
+            {
+              "category": "Bills/Invoices",
+              "description": "Financial documents like hospital bills, pharmacy invoices, and insurance-related receipts. Use to prepare weekly summaries for claim submission."
+            },
+            {
+              "category": "Medicines",
+              "description": "You are a medical text extraction assistant. Your job is to read the email texts and identify all medicines or drugs mentioned. Do not include dosages, strengths, or schedules — for example, “Zepbound 2.5 mg weekly” should simply be “Zepbound.” Ignore anything that is not a medicine, such as lab tests (e.g., CBC, PET/CT), doctor names, hospital names, or billing information. "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1.1,
+      "position": [
+        144,
+        0
+      ],
+      "id": "2f9f6be4-c395-4d26-a6fe-c2c700b30b31",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        144,
+        256
+      ],
+      "id": "c7002013-d241-453e-89b3-02e694b2f9b2",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "7xks4OiL6vepeQtZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are generating a professional medical note for a Google Doc, intended for doctor use only. Using the extracted contents of the PET/CT/Histopathology report, write a structured summary that includes all available parameters. Explicitly capture tumor measurements, SUVmax values, lymph node involvement, metastasis locations, histological subtype, staging details according to AJCC 8th edition if mentioned, and any comparison to prior studies such as whether lesions have grown, shrunk, or remained stable. Present the information in a clear, clinical tone that can be reviewed in a medical setting. Do not include a patient-facing explanation here; this output is strictly the doctor’s record.",
+              "role": "assistant"
+            },
+            {
+              "content": "Add a patient facing report too, explaining everything in easy language. Use polite language"
+            }
+          ]
+        },
+        "simplify": false,
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        912,
+        -208
+      ],
+      "id": "9fe3b1f4-26e9-4c08-8d46-a48c6b67a3c3",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "7xks4OiL6vepeQtZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are analyzing a set of blood test results and need to produce two outputs. For the doctor, write a structured summary that points out all abnormal values compared with reference ranges. Group the findings by category (for example hematology, liver function, renal function), and mention any clinically relevant trends such as whether hemoglobin is dropping, white blood cells are recovering, or platelets are improving compared to the previous report. For the patient, prepare a simple and empathetic alert message only if important values such as hemoglobin, white blood cells, or platelets are below normal. Explain which value is low or high, what this could mean in plain language, and encourage the patient to discuss the findings with their doctor, while avoiding treatment recommendations. The output should return both the doctor’s structured summary and the patient’s alert message."
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        960,
+        128
+      ],
+      "id": "56116998-7b10-4385-80e5-5a8706b2a0ec",
+      "name": "Message a model1",
+      "credentials": {
+        "openAiApi": {
+          "id": "7xks4OiL6vepeQtZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "You are preparing a weekly package of medical bills and invoices for insurance submission. Consolidate all of the invoices provided, and generate a short professional cover email addressed to the insurer i.e. NivaBupa. The email should include the patient’s name, the policy number if available, the total claim amount, and a note that the detailed invoices are attached. Also create a clean summary table listing each invoice with its number, provider name, date, and billed amount, and calculate the total of all invoices combined. Keep the tone formal and business-like so that the content is ready for submission to the insurance company. The output should return the cover email text, the the total claim amount(in rupees) and the invoices attached. Extract the hospital name and dates from the invoices itself.",
+              "role": "assistant"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        928,
+        672
+      ],
+      "id": "a4c86eb0-2f5f-4a21-9ec3-272ae1f0c81d",
+      "name": "Message a model2",
+      "credentials": {
+        "openAiApi": {
+          "id": "7xks4OiL6vepeQtZ",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "driveId": "=myDrive",
+        "folderId": "1j89KikSEsKwqnFjYT7N9hL8fPHtrwmDy",
+        "title": "Doctor Summary of all the scans, etc."
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        -112
+      ],
+      "id": "1094cf1e-ce76-4025-9fe7-7b1fa85e06c5",
+      "name": "Create a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ JSON.stringify($('Message a model').item.json.choices[0].message.content) }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1904,
+        -112
+      ],
+      "id": "737892fc-e86e-4f56-8a95-425c3d20ec69",
+      "name": "Update a document",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3675791770780914743"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        704,
+        -208
+      ],
+      "id": "346f7979-f8c0-4b34-b883-b9d3d7cac148",
+      "name": "PET/CT/Histopathology Reports",
+      "webhookId": "a9c62398-f287-40a9-bbc0-9ca9cff2e85e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_602549059877876772"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        752,
+        128
+      ],
+      "id": "ccc82b19-5a37-4122-b3ce-ed61cf298f66",
+      "name": "Blood Tests",
+      "webhookId": "073a0de1-f103-4884-994b-b557b536220c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "folderId": "1YxwYnXD5RsiP09xU4RiSk0bQ4Pd_OtR7",
+        "title": "Blood Reports"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        256
+      ],
+      "id": "f1a59a86-d074-4fbe-9119-6c3cb48db75e",
+      "name": "Create a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "=Bills",
+        "message": "={{ $json.message.content.cover_email.body }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1264,
+        672
+      ],
+      "id": "9a8258fe-12fc-44ce-aed5-18570bccb42b",
+      "name": "Create a draft",
+      "webhookId": "6074e587-8a8b-45ce-9f6f-edac686fddb6",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+19034594136",
+        "to": "+918447104928",
+        "message": "={{ JSON.stringify($('Message a model').item.json.choices[0].message.content.patient_facing_report) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        2160,
+        -112
+      ],
+      "id": "27d6eb0b-c8eb-44c5-8a7d-81478f01e04d",
+      "name": "Send an SMS/MMS/WhatsApp message",
+      "credentials": {
+        "twilioApi": {
+          "id": "MWl6PkxbKe2xaXtI",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "__CUSTOM_API_CALL__",
+        "requestOptions": {}
+      },
+      "type": "@brightdata/n8n-nodes-brightdata.brightData",
+      "typeVersion": 1,
+      "position": [
+        1808,
+        448
+      ],
+      "id": "b2a924d6-6e06-4fa2-aafc-1a4650ee1b43",
+      "name": "BrightData",
+      "credentials": {
+        "brightdataApi": {
+          "id": "Y27XnFTQzEZgtuPK",
+          "name": "BrightData account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+19034594136",
+        "to": "+918447104928",
+        "message": "={{ $('Message a model1').item.json.message.content.patient_alert }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        2000,
+        256
+      ],
+      "id": "8bea61b6-2207-49e1-93b4-89ff4c8e4688",
+      "name": "Send an SMS/MMS/WhatsApp message1",
+      "credentials": {
+        "twilioApi": {
+          "id": "MWl6PkxbKe2xaXtI",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+19034594136",
+        "to": "+918447104928",
+        "message": "Hello, we've compiled your weekly bills into a draft and they are ready for your review and send",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        672
+      ],
+      "id": "bcdcd21f-07c7-4eca-bc14-8c1a217d9ee4",
+      "name": "Send an SMS/MMS/WhatsApp message2",
+      "credentials": {
+        "twilioApi": {
+          "id": "MWl6PkxbKe2xaXtI",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI",
+          "mode": "list",
+          "cachedResultName": "Medicines",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1168,
+        448
+      ],
+      "id": "b46edeeb-2f9c-48aa-b151-38a6b52b92ef",
+      "name": "Get row(s) in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4a7WJwRF1jbJULo9",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build one {drug_name, url} item per med column in each row.\n// Expects columns like: row_number, Zepbound, mounjaro, url (base)\n// Produces: [{ drug_name: \"Zepbound\", url: \"https://www.goodrx.com/zepbound\" }, ...]\n\nfunction toSlug(name) {\n  return name\n    .toLowerCase()\n    .replace(/[^a-z0-9\\s-]/g, '')\n    .trim()\n    .replace(/\\s+/g, '-');\n}\n\nconst out = [];\n\nfor (const item of items) {\n  const row = item.json || {};\n  const base = (row.url || 'https://www.goodrx.com').replace(/\\/+$/, '');\n\n  // If the row already has a single \"drug_name\", honor it\n  if (row.drug_name && typeof row.drug_name === 'string') {\n    const slug = toSlug(row.drug_name);\n    out.push({ json: { ...row, drug_name: row.drug_name, url: `${base}/${encodeURIComponent(slug)}` } });\n    continue;\n  }\n\n  // Otherwise, treat every column except these as a \"med column\"\n  const skip = new Set(['row_number', 'url', 'drug_name']);\n  for (const [col, val] of Object.entries(row)) {\n    if (skip.has(col)) continue;\n    // Only create a URL if the cell is non-empty (you can relax this if needed)\n    if (val === null || val === undefined || String(val).trim() === '') continue;\n\n    const drugName = col.trim();\n    const slug = toSlug(drugName);\n    out.push({\n      json: {\n        ...row,\n        drug_name: drugName,\n        url: `${base}/${encodeURIComponent(slug)}`\n      }\n    });\n  }\n}\n\nreturn out.length ? out : [{ json: {} }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1392,
+        448
+      ],
+      "id": "32b92502-5ef3-490d-955f-519e6f53424e",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI",
+          "mode": "list",
+          "cachedResultName": "Medicines",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pentoxifylline": "{{ $json.url }}",
+            "lanoxin": "{{ $json.url }}"
+          },
+          "matchingColumns": [
+            "lanoxin"
+          ],
+          "schema": [
+            {
+              "id": "lanoxin",
+              "displayName": "lanoxin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pentoxifylline",
+              "displayName": "pentoxifylline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1584,
+        448
+      ],
+      "id": "18dd3528-d4a1-455b-a21b-41448351411a",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4a7WJwRF1jbJULo9",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.brightdata.com/dca/trigger?queue_next=1&collector=c_mf082d5n106y2hrfpk",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "brightdataApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer fdb576274f45a1be6447994342ccbefed902a348deae33cbc6aca0e9a9863d10"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "=[\n  {\n    \"url\": \"{{ $('Code').item.json.url }}\"\n  }\n]\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2000,
+        448
+      ],
+      "id": "05486d64-1c5d-4535-a8e2-65b2bc233694",
+      "name": "HTTP Request2",
+      "credentials": {
+        "brightdataApi": {
+          "id": "Y27XnFTQzEZgtuPK",
+          "name": "BrightData account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.brightdata.com/dca/dataset?id={{$json.collection_id}}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "brightdataApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "=Bearer fdb576274f45a1be6447994342ccbefed902a348deae33cbc6aca0e9a9863d10"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2208,
+        448
+      ],
+      "id": "988e5e02-904a-425e-978f-2bc7ae13df55",
+      "name": "HTTP Request3",
+      "credentials": {
+        "brightdataApi": {
+          "id": "Y27XnFTQzEZgtuPK",
+          "name": "BrightData account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8d603fa-b95b-4cd7-a9f2-4c2c2c790e8d",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1472,
+        -208
+      ],
+      "id": "8f8ca051-662b-465e-8337-218cb8c6bbda",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Tumor measurements: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.tumor_measurements + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - SUVmax values: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.SUVmax_values + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Lymph node involvement: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.lymph_node_involvement + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Metastasis: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.metastasis + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Histopathology: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.histopathology + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Staging: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.staging + '\\n' +\n$('Message a model').item.json.choices[0].message.content.professional_medical_note.date_of_report + ' - Comparison to prior studies: ' + $('Message a model').item.json.choices[0].message.content.professional_medical_note.clinical_summary.comparison_to_prior_studies\n}}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1648,
+        -304
+      ],
+      "id": "639d78bc-627f-4a6e-850d-b005b1450253",
+      "name": "Update a document2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "from": "+19034594136",
+        "to": "+918447104928",
+        "message": "={{ $(\"Message a model\").item.json.choices[0].message.content.patient_report.summary }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1904,
+        -304
+      ],
+      "id": "3552f0a8-6cd1-453d-b345-e19152b6257e",
+      "name": "Send an SMS/MMS/WhatsApp message3",
+      "credentials": {
+        "twilioApi": {
+          "id": "MWl6PkxbKe2xaXtI",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "Doctor Summary of all the scans, etc.",
+        "filter": {
+          "whatToSearch": "all"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1264,
+        -208
+      ],
+      "id": "da9b4af0-dafd-4c49-9b17-a45922ff4ea7",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0qroni0emEpnaYZj",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "queryString": "Blood Tests",
+        "filter": {
+          "whatToSearch": "all"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1280,
+        128
+      ],
+      "id": "d70a1a57-ab35-4e63-99f3-e88255d0aafc",
+      "name": "Search files and folders1",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "0qroni0emEpnaYZj",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8d603fa-b95b-4cd7-a9f2-4c2c2c790e8d",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1456,
+        128
+      ],
+      "id": "d7eede07-006a-4ada-b8b1-b436d647c9af",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "from": "+19034594136",
+        "to": "+918447104928",
+        "message": "={{ $('Message a model1').item.json.message.content.patientAlertMessage.message }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.twilio",
+      "typeVersion": 1,
+      "position": [
+        1952,
+        64
+      ],
+      "id": "ea0844e1-363e-43c8-a992-07f4f3151ff6",
+      "name": "Send an SMS/MMS/WhatsApp message4",
+      "credentials": {
+        "twilioApi": {
+          "id": "MWl6PkxbKe2xaXtI",
+          "name": "Twilio account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "1Vd-xFxBmSUhqHnBSLvytpZBhKOzj_XzwAfSGEv3CBkk",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.value }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.reference_range }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.trend }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.clinical_notes }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.value }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.reference_range }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.trend }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.clinical_notes }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1744,
+        64
+      ],
+      "id": "bf8ab847-27c9-4afa-a0e9-44c0afd897b6",
+      "name": "Update a document4",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "1Vd-xFxBmSUhqHnBSLvytpZBhKOzj_XzwAfSGEv3CBkk",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.value }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.reference_range }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.trend }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.hemoglobin.clinical_notes }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.value }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.reference_range }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.trend }}\n{{ $('Message a model1').item.json.message.content.doctor_summary.hematology.white_blood_cells.clinical_notes }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        1824,
+        256
+      ],
+      "id": "5c103017-4e00-4e64-9d5e-e2c49b675a41",
+      "name": "Update a document5",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_8067560505108357386"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        672,
+        672
+      ],
+      "id": "c4e8b58b-5320-4cbd-8c04-9fce3cad263d",
+      "name": "Bills/Invoices",
+      "webhookId": "a7725ab0-d593-41c7-8d24-d8bcf86e58df",
+      "executeOnce": false,
+      "alwaysOutputData": false,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}",
+        "labelIds": [
+          "Label_1934531342031910157"
+        ]
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        704,
+        448
+      ],
+      "id": "e2fc7a66-abdd-4429-91c7-e3e5009c0841",
+      "name": "Medicines",
+      "webhookId": "a1f18e18-d36e-4df8-a76b-179635c93ae8",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "5c7cInJwDYMadV1w",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI",
+          "mode": "list",
+          "cachedResultName": "Medicines",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1ZkZd4TEuqRG8SVicQjWlp5V4gAqQBJmID8enW0Z6_kI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "lanoxin"
+          ],
+          "schema": [
+            {
+              "id": "lanoxin",
+              "displayName": "lanoxin",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pentoxifylline",
+              "displayName": "pentoxifylline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        928,
+        448
+      ],
+      "id": "f2c4f964-fe25-47ca-aac5-11fc59582392",
+      "name": "Append or update row in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "4a7WJwRF1jbJULo9",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "folderId": "1naOJ1jctiv5k9zMJL-wvxitgmD8J_R3j",
+        "title": "Medicines"
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        448
+      ],
+      "id": "872d2b81-ed3c-4428-a056-4ca26efee078",
+      "name": "Create a document2",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentURL": "={{ $json.id }}",
+        "actionsUi": {
+          "actionFields": [
+            {
+              "action": "insert",
+              "text": "={{ $('Code1').item.json.drug_name }}\n{{ $('Code1').item.json.lowest_price }}\n{{ $('Code1').item.json.price_update_date }}\n{{ $('Code1').item.json.drug_description }}\n{{ $('Code1').item.json.related_drugs[0] }}\n{{ $('Code1').item.json.related_drugs[0].related_drug_name }}\n{{ $('Code1').item.json.related_drugs[0].related_drug_url }}\n{{ $('Code1').item.json.savings_program }}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.googleDocs",
+      "typeVersion": 2,
+      "position": [
+        2832,
+        448
+      ],
+      "id": "7e83ffe1-8b51-4e84-a184-ff4f99c5f492",
+      "name": "Update a document1",
+      "credentials": {
+        "googleDocsOAuth2Api": {
+          "id": "frPSbQxPLa3akFyL",
+          "name": "Google Docs account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "return items.map(item => {\n  // Parse the string inside \"data\" into a JSON object\n  let parsed;\n  try {\n    parsed = JSON.parse(item.json.data);\n  } catch (e) {\n    parsed = []; // fallback if parsing fails\n  }\n\n  // Return the parsed object so downstream nodes see it as normal JSON\n  return {\n    json: parsed[0] // if it's an array, take the first element\n  };\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2416,
+        448
+      ],
+      "id": "a676160e-08b9-45aa-a58a-812c715a1901",
+      "name": "Code1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "PET/CT/Histopathology Reports",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Blood Tests",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Bills/Invoices",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Medicines",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model2": {
+      "main": [
+        [
+          {
+            "node": "Create a draft",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model1": {
+      "main": [
+        [
+          {
+            "node": "Search files and folders1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document": {
+      "main": [
+        [
+          {
+            "node": "Update a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PET/CT/Histopathology Reports": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Blood Tests": {
+      "main": [
+        [
+          {
+            "node": "Message a model1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document1": {
+      "main": [
+        [
+          {
+            "node": "Update a document5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "BrightData": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a draft": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "BrightData",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request2": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Update a document2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a document",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document2": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search files and folders1": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Update a document4",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document4": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update a document5": {
+      "main": [
+        [
+          {
+            "node": "Send an SMS/MMS/WhatsApp message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bills/Invoices": {
+      "main": [
+        [
+          {
+            "node": "Message a model2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Medicines": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request3": {
+      "main": [
+        [
+          {
+            "node": "Code1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a document2": {
+      "main": [
+        [
+          {
+            "node": "Update a document1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Create a document2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "6ed97eae-6a6c-40d3-94ab-23b3782f439d",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0438132cd75a03310447340b1246ce0b906b51dd0cd2791936d0aec54f69c510"
+  },
+  "id": "CaevrGus6X00p6eq",
+  "tags": []
+}
