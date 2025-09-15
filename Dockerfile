@@ -1,55 +1,29 @@
 # Build stage
-FROM node:18-alpine AS builder
+FROM python:3.12-slim AS base
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
-COPY tsconfig.json ./
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl ca-certificates build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
-RUN npm ci --only=production && npm cache clean --force
+COPY requirements.txt ./requirements.txt
+RUN python -m venv /opt/venv && . /opt/venv/bin/activate && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Copy source code
-COPY src/ ./src/
+COPY app /app/app
 
-# Build the application
-RUN npm run build
+# Create runtime dirs
+RUN mkdir -p /app/logs /app/certs
 
-# Production stage
-FROM node:18-alpine AS production
+ENV PATH="/opt/venv/bin:$PATH"
 
-WORKDIR /app
-
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
-
-# Create non-root user
-RUN addgroup -g 1001 -S nodejs
-RUN adduser -S oncoassist -u 1001
-
-# Copy package files and install production dependencies
-COPY package*.json ./
-RUN npm ci --only=production && npm cache clean --force
-
-# Copy built application from builder stage
-COPY --from=builder /app/dist ./dist
-
-# Create necessary directories
-RUN mkdir -p logs certs && chown -R oncoassist:nodejs logs certs
-
-# Switch to non-root user
-USER oncoassist
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-  CMD node -e "console.log('Health check passed')" || exit 1
-
-# Expose port (if using webhook mode)
 EXPOSE 3000
 
-# Use dumb-init to handle signals properly
-ENTRYPOINT ["dumb-init", "--"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -fsS http://localhost:3000/health || exit 1
 
-# Start the application
-CMD ["node", "dist/index.js", "start"]
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "3000"]

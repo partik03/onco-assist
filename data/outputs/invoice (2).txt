@@ -1,0 +1,126 @@
+Tax Invoice
+Original for Recipient
+Sold By
+Nutrabay Retail Pvt Ltd
+G/F KHASRA NO-286, PUL PEHLADPUR(LAL 
+KUAN)
+BADARPUR MEHRAULI ROAD,DELHI - 110044
+Delhi, India
+friends@nutrabay.com
+Contact : 01161196333
+GSTIN/UIN :07AAHCN9317K1Z1
+State Name :Delhi , Code: 07
+FSSAI : 13322999000133
+Order No :
+M361022428
+Order Date :
+Sep 8, 2025
+Extern Order No :
+3331367_NWH_F068
+Invoice No :
+NWH25-26-0386529
+Payment Mode :
+Prepaid
+Invoice Date :
+Sep 9, 2025
+Type of Supply :
+Goods
+Order Currency :
+INR
+Place of Supply :
+Karnataka-29
+Billing Address
+Shipping Address
+Partik Singh
+A 301 Silver Pearl 
+Apartments,Choodasandra,BANGALORE, Karnataka
+India-560099
+partikbumrah13508@gmail.com
+Contact : +917814001336
+GST No:
+Partik Singh
+A 301 Silver Pearl 
+Apartments,Choodasandra,BANGALORE, Karnataka
+India-560099
+partikbumrah13508@gmail.com
+Contact : +917814001336
+GST No:
+Item Code
+HSN / 
+SAC
+Qty
+BatchNo
+Expiry 
+date
+MRP
+Disc
+Taxable 
+Value
+Total
+Shipping Charge
+ 
+ 
+ 
+0.00
+0.00
+0.00
+0.00
+NUTRABAY PRO L-
+CARNITINE 1000MG 
+60TABLETS
+21069019
+1
+FT-065
+/25
+28/11/2026
+749.00
+0.00
+295.76
+349.00
+NUTRABAY GOLD 
+CONCENTRATE WHEY 
+PROTEIN RICH 
+CHOCOLATE CREME 2KG
+21061000
+1
+153-NW
+CRC
+28/11/2026
+7699.00 0.00
+3897.46
+4599.00
+Total
+2
+4193.22
+4948.00
+GST Summary
+Taxable Value
+4193.22
+Taxable 
+Value
+CGST
+SGST/UGST
+IGST
+Rate
+Amt
+Rate
+Amt
+Rate
+Amt
+4193.22
+0%
+0.00
+0%
+0.00
+18%
+754.78
+ Total GST
+754.78
+Grand Total
+4948.00
+Amount in Words : FOUR THOUSAND NINE HUNDRED AND FOURTY EIGHT RUPEES 
+ONLY
+Thank you for shopping with us.
+Tax is not payable under reverse charge basis
+This is a computer Generated Invoice. No Signature is 
+Required

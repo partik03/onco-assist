@@ -1,0 +1,23 @@
+{
+  "source_file": "/Users/partiksingh/Documents/Hackathons/onco-assist/data/tmp/User_Charge_Invoice7274328041 (2).pdf",
+  "report_type": "unknown",
+  "patient": {
+    "name": "",
+    "id": "",
+    "sex_age": "",
+    "contact": "",
+    "aadhar": ""
+  },
+  "metadata": {
+    "report_date": "",
+    "collection_date": "",
+    "doctor": "",
+    "hospital": "",
+    "lab": ""
+  },
+  "text_content": "ORIGINAL FOR RECIPIENT\nTax Invoice\nETERNAL LIMITED (FORMERLY KNOWN AS ZOMATO LIMITED)\nAddress:\nR.G. Chambers, 80 feet Road,\n5th Block, Koramangala,\nBangalore - 560095\nPAN:\nAADCD4946L\nState:\nKarnataka\nCIN:\nL93030DL2010PLC198141\nEmail ID:\norder@zomato.com\nGSTIN:\n29AADCD4946L1Z6\nInvoice No:\nZ26KAOT051146377\nInvoice Date:\n2025-09-14\nCustomer Details\nName:\nPartik Singh Bumrah\nGSTIN:\nUNREGISTERED\nDelivery Address:\nA301, 560100\nPlace of Supply:\nKarnataka(29)\nService Details\nHSN Code:\n999799\nSupply Description:\nOther Services N.E.C\nSr.No\nParticulars\nTaxable Amount\nCGST\nSGST\nTotal\nOrder ID :7274328041\nOrder Date :2025-09-14\n1\nPlatform fee\n12.49\n1.13\n1.13\n14.75\nTotal\n12.49\n1.13\n1.13\n14.75\nAmount of ₹14.75 settled through digital mode/payment received against Order id (7274328041) dated (2025-09-14)\nTax is not payable on reverse charge basis\nFor Eternal Limited (formerly known as Zomato Limited)\nAuthorised Signatory\nCommunication Address: Pioneer Square, Ground Floor, Golf Course Extension, Gurugram, Haryana, 122102\nPlease refer to https://www.zomato.com/conditions for current version of full terms & conditions which are incorporated in this invoice by reference.\nPowered by TCPDF (www.tcpdf.org)",
+  "artifacts": {
+    "text_file": "data/outputs/User_Charge_Invoice7274328041 (2).txt",
+    "processed_at": "1757940126.8503916"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "source_file": "/Users/partiksingh/Documents/Hackathons/onco-assist/data/tmp/Order_ID_7274328041 (2).pdf",
+  "report_type": "unknown",
+  "patient": {
+    "name": "",
+    "id": "",
+    "sex_age": "",
+    "contact": "",
+    "aadhar": ""
+  },
+  "metadata": {
+    "report_date": "",
+    "collection_date": "",
+    "doctor": "",
+    "hospital": "",
+    "lab": ""
+  },
+  "text_content": "Zomato Food Order: Summary and Receipt\nOrder ID:\n 7274328041\nOrder Time:\n 14 September 2025, 04:09 PM\nCustomer Name:\n Partik Singh Bumrah\nDelivery Address:\n \nA301, Silver Pearl Apartment, Hosa Road,KSRP\nCampus,Choodasandra,Bengaluru\nRestaurant Name:\n Protein Chef\nRestaurant Address:\n \n62/1A, 1st Floor, Yajaman Complex, Right Wing, Near GR Sankalpa\nApartment, Choodasandra, Bangalore\nDelivery partner's Name:\n Deepak Kumar\nItem\n \nQuantity\n \nUnit Price \nTotal Price\nChicken Keema Pav (4 buns) - 55g Protein Chef Pro\nMeal\n \n1\n \n₹369 \n₹369\nTaxes \n₹18.50\nDelivery charge subtotal \n₹35\nRestaurant Packaging Charges \n₹20\nDonate ₹3 to Feeding India \n₹3\nPlatform fee \n₹12.50\nCoupon - (TASTENEW) \n(₹80)\nTotal \n₹378\nTerms & Conditions (https://www.zomato.com/policies/terms-of-service/) :\n1. W.e.f. 1 January 2022, for items ordered where Eternal is obligated to raise a tax invoice on behalf of the Restaurant, it can be downloaded from the link\nprovided in email containing order summary. For other products in the order that are not covered in Eternal issued tax invoice, tax invoice will be provided\nby the Restaurant Partner directly.\n2. The delivery charge and delivery surge are collected by Eternal on behalf of the person or entity undertaking delivery of this order.\n3. If you have any issues or queries in respect of your order, please contact the customer chat support through Eternal platform.\n4. If you need an 80G certificate for any donation made by you to Feeding India, please reach out to Feeding India team at contact@feedingindia.org.\n5. In case you need to get more information about restaurant's FSSAI status, please visit https://foscos.fssai.gov.in/ and use the FBO search option with the\nFSSAI License / Registration number.\n6. Please note that we do not have a customer care phone number and we never ask for any bank account details such as CVV, account number, UPI Pin\netc. across our other support channels. For your safety please do not share these details with anyone over any medium.\nProtein Chef\nLic. No. 11225302001520\nLic. No. 10019064001810",
+  "artifacts": {
+    "text_file": "data/outputs/Order_ID_7274328041 (2).txt",
+    "processed_at": "1757940126.849542"
+  }
+}

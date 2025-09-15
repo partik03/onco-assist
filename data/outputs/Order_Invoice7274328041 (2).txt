@@ -1,0 +1,74 @@
+Tax Invoice
+ORIGINAL For Recipient
+Tax Invoice on behalf of -
+Legal Entity Name : LO FRESH FOODS PRIVATE LIMITED
+Restaurant Name : Protein Chef
+Restaurant Address : 62/1A, 1st Floor, Yajaman Complex, Right Wing, Near GR Sankalpa Apartment,
+Choodasandra, Bangalore
+Restaurant GSTIN : 29AAGCL1161J1ZE
+Restaurant FSSAI : 11225302001520
+Invoice No. : 257LUBZE00000530
+Invoice Date : 14/09/2025
+Customer Name : Partik Singh Bumrah
+Delivery Address : A301, 560100
+State name & Place of Supply: Karnataka(29)
+HSN Code : 996331
+Service Description : Restaurant Service
+Particulars
+Gross
+value
+Discount
+Net
+value
+CGST
+(Rate)
+CGST
+(INR)
+SGST
+(Rate)
+SGST
+(INR)
+Total
+1 x Chicken Keema Pav (4
+buns) - 55g Protein Chef Pro
+Meal
+369
+64
+305
+2.5%
+7.625
+2.5%
+7.625
+320.25
+Item(s) Total
+369
+64
+305
+7.625
+7.625
+320.25
+Restaurant Packaging Charge
+20
+0
+20
+2.5%
+0.5
+2.5%
+0.5
+21
+Total Value
+325
+8.125
+8.125
+341.25
+Amount (in words): Three Hundred Forty One Rupees And Twenty Five Paisa Only
+Amount of INR 341.25 settled through digital mode/payment received against Order ID: 7274328041 dated
+2025-09-14.
+Supply attracts reverse charge : No
+For ETERNAL LIMITED (FORMERLY KNOWN AS ZOMATO LIMITED)
+Eternal PAN : AADCD4946L
+Eternal CIN : L93030DL2010PLC198141
+Eternal GST : 29AADCD4946L1Z6
+Eternal FSSAI : 10019064001810
+Authorised Signatory
+Powered by TCPDF (www.tcpdf.org)

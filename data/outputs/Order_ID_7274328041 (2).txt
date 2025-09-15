@@ -1,0 +1,60 @@
+Zomato Food Order: Summary and Receipt
+Order ID:
+ 7274328041
+Order Time:
+ 14 September 2025, 04:09 PM
+Customer Name:
+ Partik Singh Bumrah
+Delivery Address:
+ 
+A301, Silver Pearl Apartment, Hosa Road,KSRP
+Campus,Choodasandra,Bengaluru
+Restaurant Name:
+ Protein Chef
+Restaurant Address:
+ 
+62/1A, 1st Floor, Yajaman Complex, Right Wing, Near GR Sankalpa
+Apartment, Choodasandra, Bangalore
+Delivery partner's Name:
+ Deepak Kumar
+Item
+ 
+Quantity
+ 
+Unit Price 
+Total Price
+Chicken Keema Pav (4 buns) - 55g Protein Chef Pro
+Meal
+ 
+1
+ 
+₹369 
+₹369
+Taxes 
+₹18.50
+Delivery charge subtotal 
+₹35
+Restaurant Packaging Charges 
+₹20
+Donate ₹3 to Feeding India 
+₹3
+Platform fee 
+₹12.50
+Coupon - (TASTENEW) 
+(₹80)
+Total 
+₹378
+Terms & Conditions (https://www.zomato.com/policies/terms-of-service/) :
+1. W.e.f. 1 January 2022, for items ordered where Eternal is obligated to raise a tax invoice on behalf of the Restaurant, it can be downloaded from the link
+provided in email containing order summary. For other products in the order that are not covered in Eternal issued tax invoice, tax invoice will be provided
+by the Restaurant Partner directly.
+2. The delivery charge and delivery surge are collected by Eternal on behalf of the person or entity undertaking delivery of this order.
+3. If you have any issues or queries in respect of your order, please contact the customer chat support through Eternal platform.
+4. If you need an 80G certificate for any donation made by you to Feeding India, please reach out to Feeding India team at contact@feedingindia.org.
+5. In case you need to get more information about restaurant's FSSAI status, please visit https://foscos.fssai.gov.in/ and use the FBO search option with the
+FSSAI License / Registration number.
+6. Please note that we do not have a customer care phone number and we never ask for any bank account details such as CVV, account number, UPI Pin
+etc. across our other support channels. For your safety please do not share these details with anyone over any medium.
+Protein Chef
+Lic. No. 11225302001520
+Lic. No. 10019064001810

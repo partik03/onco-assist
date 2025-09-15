@@ -1,0 +1,23 @@
+{
+  "source_file": "/Users/partiksingh/Documents/Hackathons/onco-assist/data/tmp/invoice (2).pdf",
+  "report_type": "unknown",
+  "patient": {
+    "name": "",
+    "id": "",
+    "sex_age": "",
+    "contact": "01161196333",
+    "aadhar": ""
+  },
+  "metadata": {
+    "report_date": "",
+    "collection_date": "",
+    "doctor": "",
+    "hospital": "",
+    "lab": ""
+  },
+  "text_content": "Tax Invoice\nOriginal for Recipient\nSold By\nNutrabay Retail Pvt Ltd\nG/F KHASRA NO-286, PUL PEHLADPUR(LAL \nKUAN)\nBADARPUR MEHRAULI ROAD,DELHI - 110044\nDelhi, India\nfriends@nutrabay.com\nContact : 01161196333\nGSTIN/UIN :07AAHCN9317K1Z1\nState Name :Delhi , Code: 07\nFSSAI : 13322999000133\nOrder No :\nM361022428\nOrder Date :\nSep 8, 2025\nExtern Order No :\n3331367_NWH_F068\nInvoice No :\nNWH25-26-0386529\nPayment Mode :\nPrepaid\nInvoice Date :\nSep 9, 2025\nType of Supply :\nGoods\nOrder Currency :\nINR\nPlace of Supply :\nKarnataka-29\nBilling Address\nShipping Address\nPartik Singh\nA 301 Silver Pearl \nApartments,Choodasandra,BANGALORE, Karnataka\nIndia-560099\npartikbumrah13508@gmail.com\nContact : +917814001336\nGST No:\nPartik Singh\nA 301 Silver Pearl \nApartments,Choodasandra,BANGALORE, Karnataka\nIndia-560099\npartikbumrah13508@gmail.com\nContact : +917814001336\nGST No:\nItem Code\nHSN / \nSAC\nQty\nBatchNo\nExpiry \ndate\nMRP\nDisc\nTaxable \nValue\nTotal\nShipping Charge\n \n \n \n0.00\n0.00\n0.00\n0.00\nNUTRABAY PRO L-\nCARNITINE 1000MG \n60TABLETS\n21069019\n1\nFT-065\n/25\n28/11/2026\n749.00\n0.00\n295.76\n349.00\nNUTRABAY GOLD \nCONCENTRATE WHEY \nPROTEIN RICH \nCHOCOLATE CREME 2KG\n21061000\n1\n153-NW\nCRC\n28/11/2026\n7699.00 0.00\n3897.46\n4599.00\nTotal\n2\n4193.22\n4948.00\nGST Summary\nTaxable Value\n4193.22\nTaxable \nValue\nCGST\nSGST/UGST\nIGST\nRate\nAmt\nRate\nAmt\nRate\nAmt\n4193.22\n0%\n0.00\n0%\n0.00\n18%\n754.78\n Total GST\n754.78\nGrand Total\n4948.00\nAmount in Words : FOUR THOUSAND NINE HUNDRED AND FOURTY EIGHT RUPEES \nONLY\nThank you for shopping with us.\nTax is not payable under reverse charge basis\nThis is a computer Generated Invoice. No Signature is \nRequired",
+  "artifacts": {
+    "text_file": "data/outputs/invoice (2).txt",
+    "processed_at": "1757940120.5001252"
+  }
+}

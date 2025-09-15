@@ -1,65 +1,35 @@
 version: '3.8'
 
 services:
-  onco-assist:
+  api:
     build: .
-    container_name: onco-assist
+    container_name: onco-assist-api
     restart: unless-stopped
     env_file:
       - .env
-    volumes:
-      - ./logs:/app/logs
-      - ./certs:/app/certs
     environment:
-      - NODE_ENV=production
-    depends_on:
-      - redis
-    networks:
-      - onco-assist-network
-
-  redis:
-    image: redis:7-alpine
-    container_name: onco-assist-redis
-    restart: unless-stopped
+      - TIDB_HOST=${TIDB_HOST}
+      - TIDB_PORT=${TIDB_PORT}
+      - TIDB_USER=${TIDB_USER}
+      - TIDB_PASSWORD=${TIDB_PASSWORD}
+      - TIDB_DATABASE=${TIDB_DATABASE}
+      - TIDB_SSL_CA_PATH=/app/certs/ca-cert.pem
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - GOOGLE_REFRESH_TOKEN=${GOOGLE_REFRESH_TOKEN}
+      - GOOGLE_ACCESS_TOKEN=${GOOGLE_ACCESS_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=${OPENAI_MODEL}
+      - TWILIO_ACCOUNT_SID=${TWILIO_ACCOUNT_SID}
+      - TWILIO_AUTH_TOKEN=${TWILIO_AUTH_TOKEN}
+      - TWILIO_FROM_NUMBER=${TWILIO_FROM_NUMBER}
     volumes:
-      - redis_data:/data
-    networks:
-      - onco-assist-network
-
-  # Optional: Add monitoring
-  prometheus:
-    image: prom/prometheus:latest
-    container_name: onco-assist-prometheus
-    restart: unless-stopped
-    ports:
-      - "9090:9090"
-    volumes:
-      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
-    networks:
-      - onco-assist-network
-    profiles:
-      - monitoring
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: onco-assist-grafana
-    restart: unless-stopped
+      - ./certs:/app/certs:ro
+      - ./logs:/app/logs
     ports:
       - "3000:3000"
-    environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    volumes:
-      - grafana_data:/var/lib/grafana
     networks:
       - onco-assist-network
-    profiles:
-      - monitoring
-
-volumes:
-  redis_data:
-  prometheus_data:
-  grafana_data:
 
 networks:
   onco-assist-network:

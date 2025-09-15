@@ -1,0 +1,61 @@
+ORIGINAL FOR RECIPIENT
+Tax Invoice
+ETERNAL LIMITED (FORMERLY KNOWN AS ZOMATO LIMITED)
+Address:
+R.G. Chambers, 80 feet Road,
+5th Block, Koramangala,
+Bangalore - 560095
+PAN:
+AADCD4946L
+State:
+Karnataka
+CIN:
+L93030DL2010PLC198141
+Email ID:
+order@zomato.com
+GSTIN:
+29AADCD4946L1Z6
+Invoice No:
+Z26KAOT051146377
+Invoice Date:
+2025-09-14
+Customer Details
+Name:
+Partik Singh Bumrah
+GSTIN:
+UNREGISTERED
+Delivery Address:
+A301, 560100
+Place of Supply:
+Karnataka(29)
+Service Details
+HSN Code:
+999799
+Supply Description:
+Other Services N.E.C
+Sr.No
+Particulars
+Taxable Amount
+CGST
+SGST
+Total
+Order ID :7274328041
+Order Date :2025-09-14
+1
+Platform fee
+12.49
+1.13
+1.13
+14.75
+Total
+12.49
+1.13
+1.13
+14.75
+Amount of ₹14.75 settled through digital mode/payment received against Order id (7274328041) dated (2025-09-14)
+Tax is not payable on reverse charge basis
+For Eternal Limited (formerly known as Zomato Limited)
+Authorised Signatory
+Communication Address: Pioneer Square, Ground Floor, Golf Course Extension, Gurugram, Haryana, 122102
+Please refer to https://www.zomato.com/conditions for current version of full terms & conditions which are incorporated in this invoice by reference.
+Powered by TCPDF (www.tcpdf.org)
