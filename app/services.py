@@ -78,10 +78,36 @@ class GmailService:
     def get_unread(self, max_results: int = 10) -> List[Dict[str, Any]]:
         res = self._gmail.users().messages().list(userId="me", q="is:unread", maxResults=max_results).execute()
         return res.get("messages", [])
+    
+    def get_recent_with_attachments(self, days: int = 3, max_results: int = 50) -> List[Dict[str, Any]]:
+        """Get recent emails with attachments"""
+        from datetime import datetime, timedelta
+        
+        # Calculate date for Gmail search
+        since_date = (datetime.now() - timedelta(days=days)).strftime('%Y/%m/%d')
+        query = f"has:attachment after:{since_date}"
+        
+        res = self._gmail.users().messages().list(userId="me", q=query, maxResults=max_results).execute()
+        return res.get("messages", [])
 
     def get_message(self, message_id: str) -> Dict[str, Any]:
-        msg = self._gmail.users().messages().get(userId="me", id=message_id, format="metadata", metadataHeaders=["Subject","From","Date"]).execute()
+        msg = self._gmail.users().messages().get(userId="me", id=message_id).execute()
         headers = {h["name"]: h["value"] for h in msg.get("payload", {}).get("headers", [])}
+        
+        # Check if message has attachments
+        has_attachments = False
+        payload = msg.get("payload", {})
+        if payload.get("parts"):
+            for part in payload["parts"]:
+                if part.get("filename"):
+                    has_attachments = True
+                    break
+                elif part.get("parts"):  # Check nested parts
+                    for nested_part in part["parts"]:
+                        if nested_part.get("filename"):
+                            has_attachments = True
+                            break
+        
         return {
             "id": message_id,
             "subject": headers.get("Subject", ""),
@@ -90,6 +116,7 @@ class GmailService:
             "snippet": msg.get("snippet", ""),
             "threadId": msg.get("threadId", ""),
             "labelIds": msg.get("labelIds", []),
+            "attachments": has_attachments,
         }
     
     def get_attachments(self, message_id: str) -> List[Dict[str, Any]]:

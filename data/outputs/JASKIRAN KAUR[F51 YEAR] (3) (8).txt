@@ -1,0 +1,329 @@
+:
+:
+88178
+250915014
+Perm No.
+S.No.
+:
+:
+51 Yrs / Female
+Age / Sex
+Name
+Ms JASKIRAN KAUR
+:
+:
+Sample Type
+Ref. Doctor
+Dr.MEENU WALIA
+SERUM
+Coll. Date/Time
+:
+:
+15/09/2025 8:57
+Reg. Date/Time
+15/09/2025 8:56
+Print Date/Time
+:
+15/09/2025 14:32
+KIDNEY FUNCTION TEST
+BIOCHEMISTRY TEST REPORT
+Investigation
+Result
+Units
+Biological Ref. Interval
+Method
+23.8
+B.UREA
+13 - 43
+mg/dL
+UREASE
+11.12
+BLOOD UREA NITROGEN
+5 - 20
+mg/dL
+0.6
+S.CREATININE
+0.5 - 1.0
+mg/dL
+ALKALINE PICRATE
+4.8
+S.URIC ACID
+3.5 - 7.2
+mg/dL
+URICASE
+8.7
+S.CALCIUM
+8.6 - 10.2
+mg/dL
+BAPTA
+2.7
+S.PHOSPHORUS
+2.5 - 4.5
+mg/dL
+PHOSPHOMOLYBDATE
+136
+SODIUM
+136 - 145
+mmol/L
+ISE
+3.7
+S.POTASSIUM
+3.5 - 5.1
+mmol/L
+ISE
+100
+S.CHLORIDE
+98 - 107
+mmol/L
+ISE
+----End Of Report----
+Dr.Pradeep S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.)
+Dr.J.S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.) MAMC
+Page 1 of 1
+Page 1
+:
+:
+88178
+250915014
+Perm No.
+S.No.
+:
+:
+51 Yrs / Female
+Age / Sex
+Name
+Ms JASKIRAN KAUR
+:
+:
+Sample Type
+Ref. Doctor
+Dr.MEENU WALIA
+Coll. Date/Time
+:
+:
+15/09/2025 8:57
+Reg. Date/Time
+15/09/2025 8:56
+Print Date/Time
+:
+15/09/2025 14:32
+COMPLETE BLOOD COUNT
+HAEMATOLOGY TEST REPORT
+Investigation
+Result
+Units
+Biological Ref. Interval
+Method
+RBC PARAMETERS
+9.4
+HAEMOGLOBIN
+11.5 - 16.5
+gm/dL
+SLS-HB
+3.16
+R.B.C. COUNT
+4.0 - 5.2
+x 10^6/ul
+HD FOCUS & FLOW 
+CYTOMETRY
+28.50
+PCV
+35 - 47
+%
+90.19
+M.C.V
+76 - 96
+cu-microns
+29.75
+M.C.H
+27 - 33
+Pg.
+32.98
+M.C.H.C
+32 - 37
+%
+13.30
+RDW (CV)
+10 - 16
+%
+43.5
+RDW (SD)
+35.0 - 56.0
+fL
+1.38
+RETICULOCYTE COUNT
+0.2 - 2
+%
+12.3
+IMMATURE RETICULOCYTE FRACTION(IRF)
+0 - 15
+%
+35.8
+RETICULOCYTE Hb
+27.0 - 36.0
+pg
+WBC PARAMETERS
+5750
+TLC
+4000 - 11000
+/c.mm
+HD FOCUS & FLOW 
+CYTOMETRY
+80
+Neutrophils
+40 - 75
+%
+12
+Lymphocytes
+20 - 48
+%
+1
+Eosinophils
+1 - 6
+%
+7
+Monocytes
+0 - 10
+%
+1.9
+IMMATURE GRANULOCYTES
+0.0 - 0.5
+%
+0.1
+HIGH FLUORESCENCE CELLS
+0.0 - 0.4
+%
+PLATELET PARAMETERS
+230
+PLATELET COUNT (IMPEDANCE)
+150 - 450
+x10^3/uL
+252
+PLATELET COUNT (OPTICAL)
+150 - 450
+x10^3/uL
+Dr.Pradeep S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.)
+Dr.J.S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.) MAMC
+Page 1 of 3
+Page 2
+:
+:
+88178
+250915014
+Perm No.
+S.No.
+:
+:
+51 Yrs / Female
+Age / Sex
+Name
+Ms JASKIRAN KAUR
+:
+:
+Sample Type
+Ref. Doctor
+Dr.MEENU WALIA
+Coll. Date/Time
+:
+:
+15/09/2025 8:57
+Reg. Date/Time
+15/09/2025 8:56
+Print Date/Time
+:
+15/09/2025 14:32
+COMPLETE BLOOD COUNT
+HAEMATOLOGY TEST REPORT
+Investigation
+Result
+Units
+Biological Ref. Interval
+Method
+PLATELET PARAMETERS
+252
+PLATELET COUNT
+150 - 450
+x 10^3/uL
+SWITCHING ALGORITHM
+9.90
+MPV
+6 - 12
+cu-microns
+16.50
+PDW (CV)
+10 - 18
+%
+0.25
+PCT
+0.1 - 0.5
+%
+26
+P-LCR
+11.0 - 40.0
+%
+6.3
+IMMATURE PLATELET FRACTION (IPF)
+0.6 - 6.6
+%
+ANEMIA WITH RELATIVE NEUTROPHILIA AND MILD SHIFT TO 
+LEFT.
+IMPRESSION
+CBC Done using Fluorescence Flowcytometry & SF CUBE Technology.
+Dr.Pradeep S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.)
+Dr.J.S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.) MAMC
+Page 2 of 3
+Page 3
+:
+:
+88178
+250915014
+Perm No.
+S.No.
+:
+:
+51 Yrs / Female
+Age / Sex
+Name
+Ms JASKIRAN KAUR
+:
+:
+Sample Type
+Ref. Doctor
+Dr.MEENU WALIA
+Coll. Date/Time
+:
+:
+15/09/2025 8:57
+Reg. Date/Time
+15/09/2025 8:56
+Print Date/Time
+:
+15/09/2025 14:32
+COMPLETE BLOOD COUNT
+HAEMATOLOGY TEST REPORT
+Investigation
+Result
+Units
+Biological Ref. Interval
+Method
+----End Of Report----
+Dr.Pradeep S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.)
+Dr.J.S. Suri
+Consultant Pathologist 
+M.B.B.S M.D.(Path.) MAMC
+Page 3 of 3
+Page 4
